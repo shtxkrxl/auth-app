@@ -58,6 +58,7 @@
       class="mx-auto mt-[4px] w-[200px] md:w-[120px] py-[4px] bg-red-400 rounded-[5px] text-white text-[16px] md:text-[12px] text-center font-semibold shadow">
       Sign Up
     </button>
+
     <p
       v-if="errorMessage"
       class="-mt-[4px] font-bold text-red-500 text-center text-[14px] md:text-[12px]">
@@ -74,10 +75,13 @@
 </template>
 
 <script setup>
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  onAuthStateChanged,
+} from 'firebase/auth';
 import { ref as storageRef, uploadBytes } from 'firebase/storage';
-import { ref as databaseRef, set } from 'firebase/database';
-import { auth, storage, database } from '../database/firebase';
+import { auth, storage } from '../database/firebase';
 
 const name = ref(null);
 const email = ref(null);
@@ -90,21 +94,27 @@ const onFileChange = event => {
   urlPicture.value = URL.createObjectURL(event.target.files[0]);
   filePicture.value = event.target.files[0];
 };
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+    navigateTo('/');
+  }
+});
+
 const createUser = () => {
   if (name.value.length >= 3 && email.value && password.value.length >= 6) {
     createUserWithEmailAndPassword(auth, email.value, password.value)
       .then(async userCredential => {
-        errorMessage.value = null;
         const user = userCredential.user;
         if (urlPicture.value) {
           const pictureRef = storageRef(storage, user.uid);
           await uploadBytes(pictureRef, filePicture.value);
         }
-        await set(databaseRef(database, 'users/' + user.uid), {
-          username: name.value,
-          email: email.value,
-          profilePicture: `https://firebasestorage.googleapis.com/v0/b/auth-83f60.appspot.com/o/${user.uid}?alt=media&token=38393c3d-4092-4cbe-b178-32745a32d0c7`,
+        await updateProfile(auth.currentUser, {
+          displayName: name.value,
+          photoURL: `https://firebasestorage.googleapis.com/v0/b/auth-83f60.appspot.com/o/${user.uid}?alt=media&token=af9cc240-07c2-41d4-8233-b537ad5f863d`,
         });
+        navigateTo('/');
       })
       .catch(error => {
         if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
