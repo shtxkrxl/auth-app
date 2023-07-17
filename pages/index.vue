@@ -30,8 +30,8 @@ const name = ref(null);
 const email = ref(null);
 const urlPicture = ref(null);
 
-const logOut = () => {
-  signOut(auth);
+const logOut = async () => {
+  await signOut(auth);
 };
 
 onAuthStateChanged(auth, user => {

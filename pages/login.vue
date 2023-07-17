@@ -50,17 +50,19 @@ const email = ref(null);
 const password = ref(null);
 const errorMessage = ref(null);
 
-const login = () => {
-  signInWithEmailAndPassword(auth, email.value, password.value).catch(error => {
-    if (
-      error.message === 'Firebase: Error (auth/user-not-found).' ||
-      error.message === 'Firebase: Error (auth/wrong-password).'
-    ) {
-      errorMessage.value = 'Invalid email or password';
-    } else {
-      errorMessage.value = error.message;
+const login = async () => {
+  await signInWithEmailAndPassword(auth, email.value, password.value).catch(
+    error => {
+      if (
+        error.message === 'Firebase: Error (auth/user-not-found).' ||
+        error.message === 'Firebase: Error (auth/wrong-password).'
+      ) {
+        errorMessage.value = 'Invalid email or password';
+      } else {
+        errorMessage.value = error.message;
+      }
     }
-  });
+  );
 };
 
 onAuthStateChanged(auth, user => {

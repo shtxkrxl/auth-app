@@ -101,9 +101,9 @@ onAuthStateChanged(auth, user => {
   }
 });
 
-const createUser = () => {
+const createUser = async () => {
   if (name.value.length >= 3 && email.value && password.value.length >= 6) {
-    createUserWithEmailAndPassword(auth, email.value, password.value)
+    await createUserWithEmailAndPassword(auth, email.value, password.value)
       .then(async userCredential => {
         const user = userCredential.user;
         if (urlPicture.value) {
