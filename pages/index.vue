@@ -1,6 +1,10 @@
 <template>
   <div
     class="mx-[24px] mt-[98px] py-[22px] px-[24px] flex gap-[16px] bg-white/70 rounded-[10px] shadow-md md:mx-auto md:mt-[176px] md:py-[16px] md:px-[16px] md:w-[298px]">
+    <Head>
+      <Title>Auth</Title>
+    </Head>
+
     <div
       class="w-[88px] h-[88px] bg-white/80 shadow rounded-full overflow-hidden">
       <img
@@ -14,7 +18,7 @@
       <p class="text-[14px] -mt-[4px]">{{ email }}</p>
       <p
         @click="logOut"
-        v-if="name"
+        v-if="email"
         class="mt-[3px] text-[14px] text-[#EC665F] cursor-pointer">
         Log Out
       </p>

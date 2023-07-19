@@ -1,6 +1,10 @@
 <template>
   <div
     class="mx-[40px] mt-[98px] py-[22px] px-[40px] flex flex-col gap-[12px] bg-white/70 rounded-[10px] shadow-md md:mx-auto md:mt-[176px] md:py-[16px] md:px-[21px] md:w-[234px]">
+    <Head>
+      <Title>Registration</Title>
+    </Head>
+
     <p class="text-[20px] font-semibold text-center md:text-[16px]">
       Registration
     </p>
@@ -109,12 +113,17 @@ const createUser = async () => {
         if (urlPicture.value) {
           const pictureRef = storageRef(storage, user.uid);
           await uploadBytes(pictureRef, filePicture.value);
+          await updateProfile(auth.currentUser, {
+            displayName: name.value,
+            photoURL: `https://firebasestorage.googleapis.com/v0/b/auth-83f60.appspot.com/o/${user.uid}?alt=media&token=af9cc240-07c2-41d4-8233-b537ad5f863d`,
+          });
+          await navigateTo('/');
+        } else {
+          await updateProfile(auth.currentUser, {
+            displayName: name.value,
+          });
+          await navigateTo('/');
         }
-        await updateProfile(auth.currentUser, {
-          displayName: name.value,
-          photoURL: `https://firebasestorage.googleapis.com/v0/b/auth-83f60.appspot.com/o/${user.uid}?alt=media&token=af9cc240-07c2-41d4-8233-b537ad5f863d`,
-        });
-        navigateTo('/');
       })
       .catch(error => {
         if (error.message === 'Firebase: Error (auth/email-already-in-use).') {

@@ -1,6 +1,10 @@
 <template>
   <div
     class="mx-[40px] mt-[98px] py-[22px] px-[40px] flex flex-col gap-[12px] bg-white/70 rounded-[10px] shadow-md md:mx-auto md:mt-[176px] md:py-[16px] md:px-[21px] md:w-[234px]">
+    <Head>
+      <Title>Login</Title>
+    </Head>
+
     <p class="text-[20px] font-semibold text-center md:text-[16px]">Login</p>
 
     <div class="text-[16px] md:text-[14px]">
