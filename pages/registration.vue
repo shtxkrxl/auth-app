@@ -43,7 +43,7 @@
             alt="profile picture"
             class="h-full w-full" />
         </div>
-        <input
+        <!-- <input
           id="file"
           type="file"
           accept="image/jpeg,image/png"
@@ -53,7 +53,7 @@
           for="file"
           class="py-[3px] px-[12px] bg-white/80 rounded-[5px] text-center text-[14px] md:text-[12px] shadow cursor-pointer">
           Choose file
-        </label>
+        </label> -->
       </div>
     </div>
 
@@ -95,8 +95,8 @@ const filePicture = ref(null);
 const errorMessage = ref(null);
 
 const onFileChange = event => {
-  urlPicture.value = URL.createObjectURL(event.target.files[0]);
-  filePicture.value = event.target.files[0];
+  // urlPicture.value = URL.createObjectURL(event.target.files[0]);
+  // filePicture.value = event.target.files[0];
 };
 
 onAuthStateChanged(auth, user => {
