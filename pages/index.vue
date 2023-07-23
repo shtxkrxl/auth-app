@@ -11,7 +11,7 @@
         v-if="urlPicture"
         :src="urlPicture"
         alt="profile picture"
-        class="h-full w-full" />
+        class="h-full w-full object-cover" />
     </div>
     <div>
       <p class="font-semibold text-[16px]">{{ name }}</p>
@@ -40,9 +40,11 @@ const logOut = async () => {
 
 onAuthStateChanged(auth, user => {
   if (user) {
-    name.value = user.displayName;
-    email.value = user.email;
-    urlPicture.value = user.photoURL;
+    setTimeout(() => {
+      name.value = user.displayName;
+      email.value = user.email;
+      urlPicture.value = user.photoURL;
+    }, 1000);
   } else {
     navigateTo('/login');
   }

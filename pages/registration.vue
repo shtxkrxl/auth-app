@@ -41,7 +41,7 @@
             v-if="urlPicture"
             :src="urlPicture"
             alt="profile picture"
-            class="h-full w-full" />
+            class="h-full w-full object-cover" />
         </div>
         <input
           id="file"
@@ -93,10 +93,18 @@ const password = ref(null);
 const urlPicture = ref(null);
 const filePicture = ref(null);
 const errorMessage = ref(null);
+// const bgPicture = ref('bg-[url()]');
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+    navigateTo('/');
+  }
+});
 
 const onFileChange = event => {
   urlPicture.value = URL.createObjectURL(event.target.files[0]);
   filePicture.value = event.target.files[0];
+  // bgPicture.value = `bg-[url(${urlPicture})]`;
 };
 
 const createUser = async () => {
@@ -104,20 +112,12 @@ const createUser = async () => {
     await createUserWithEmailAndPassword(auth, email.value, password.value)
       .then(async userCredential => {
         const user = userCredential.user;
-        if (urlPicture.value) {
-          const pictureRef = storageRef(storage, user.uid);
-          await uploadBytes(pictureRef, filePicture.value);
-          await updateProfile(auth.currentUser, {
-            displayName: name.value,
-            photoURL: `https://firebasestorage.googleapis.com/v0/b/auth-83f60.appspot.com/o/${user.uid}?alt=media&token=af9cc240-07c2-41d4-8233-b537ad5f863d`,
-          });
-          await navigateTo('/');
-        } else {
-          await updateProfile(auth.currentUser, {
-            displayName: name.value,
-          });
-          await navigateTo('/');
-        }
+        const pictureRef = storageRef(storage, user.uid);
+        await uploadBytes(pictureRef, filePicture.value);
+        await updateProfile(auth.currentUser, {
+          displayName: name.value,
+          photoURL: `https://firebasestorage.googleapis.com/v0/b/auth-83f60.appspot.com/o/${user.uid}?alt=media&token=af9cc240-07c2-41d4-8233-b537ad5f863d`,
+        });
       })
       .catch(error => {
         if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
