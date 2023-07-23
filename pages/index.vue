@@ -44,7 +44,7 @@ onAuthStateChanged(auth, user => {
       name.value = user.displayName;
       email.value = user.email;
       urlPicture.value = user.photoURL;
-    }, 1000);
+    }, 2000);
   } else {
     navigateTo('/login');
   }
