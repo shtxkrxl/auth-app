@@ -93,7 +93,6 @@ const password = ref(null);
 const urlPicture = ref(null);
 const filePicture = ref(null);
 const errorMessage = ref(null);
-// const bgPicture = ref('bg-[url()]');
 
 onAuthStateChanged(auth, user => {
   if (user) {
@@ -104,7 +103,6 @@ onAuthStateChanged(auth, user => {
 const onFileChange = event => {
   urlPicture.value = URL.createObjectURL(event.target.files[0]);
   filePicture.value = event.target.files[0];
-  // bgPicture.value = `bg-[url(${urlPicture})]`;
 };
 
 const createUser = async () => {
