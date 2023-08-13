@@ -71,7 +71,7 @@
 <!-- CONTACT -->
 ## Контакты
 
-Александр Кальмаев - sanya.kalmaev@yandex.ru
+Александр Кальмаев - <a href="mailto:shtxkrxl@ya.ru" target="_blank">shtxkrxl@ya.ru</a>
 
 Ссылка на проект: [https://github.com/shtxkrxl/auth-app](https://github.com/shtxkrxl/auth-app)
 
@@ -82,4 +82,4 @@
 [issues-shield]: https://img.shields.io/github/issues/shtxkrxl/auth-app.svg?style=for-the-badge
 [issues-url]: https://github.com/shtxkrxl/auth-app/issues
 [license-shield]: https://img.shields.io/github/license/shtxkrxl/auth-app.svg?style=for-the-badge
-[license-url]: https://github.com/shtxkrxl/auth-app/blob/master/LICENSE.txt
+[license-url]: https://github.com/shtxkrxl/auth-app/blob/master/LICENSE
