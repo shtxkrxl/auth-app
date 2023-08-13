@@ -8,7 +8,6 @@
 -->
 [![commits][commits-shield]][commits-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -71,7 +70,7 @@
 <!-- CONTACT -->
 ## Контакты
 
-Александр Кальмаев - <a href="mailto:shtxkrxl@ya.ru" target="_blank">shtxkrxl@ya.ru</a>
+Александр Кальмаев - <a href="mailto:shtxkrxl@yandex.ru" target="_blank">shtxkrxl@yandex.ru</a>
 
 Ссылка на проект: [https://github.com/shtxkrxl/auth-app](https://github.com/shtxkrxl/auth-app)
 
